@@ -20,17 +20,17 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+<!-- https://img.picui.cn/free/2024/12/13/675bffd8b9195.png
+https://img.picui.cn/free/2024/12/13/675bffd8de90f.png
+https://img.picui.cn/free/2024/12/13/675bffd8e4c7d.png -->
+### 预览
+<img src="https://img.picui.cn/free/2024/12/13/675bffd8b9195.png" width="200"/>
 
-To learn more about Next.js, take a look at the following resources:
+<img src="https://img.picui.cn/free/2024/12/13/675bffd8de90f.png" width="200"/>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<img src="https://img.picui.cn/free/2024/12/13/675bffd8e4c7d.png" width="200"/>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+![]("./public/2.png")
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+![]("./public/3.png")

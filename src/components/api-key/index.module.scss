@@ -1,0 +1,14 @@
+.app {
+  @apply border border-[#e5e5e5] rounded-[5px] p-[10px] flex justify-start max-w-[768px] m-[15px];
+  :global {
+    .error {
+      @apply text-[red];
+    }
+    .label {
+      @apply items-center;
+    }
+    .form-app {
+        @apply w-full;
+    }
+  }
+}

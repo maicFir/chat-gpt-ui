@@ -12,6 +12,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "baseUrl": "./",
     "incremental": true,
     "plugins": [
       {
@@ -19,8 +20,14 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
-    }
+        "@/*": ["./src/*"],
+        "@utils/*": ["src/utils/*"],
+        "@public/*": ["public/*"],
+        "@src/*": ["src/*"],
+        "@store/*": ["src/store/*"],
+        "@comp/*": ["src/components/*"],
+        "@hooks/*": ["src/hooks/*"],
+      }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]

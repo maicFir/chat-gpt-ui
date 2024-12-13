@@ -1,0 +1,7 @@
+.app {
+  :global {
+    .search, .edit, .cloose-icon {
+      @apply flex items-center justify-center cursor-pointer w-[40px] h-[40px] hover:bg-[#ececec] rounded-[8px];
+    }
+  }
+}

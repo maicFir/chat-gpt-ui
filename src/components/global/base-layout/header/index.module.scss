@@ -1,0 +1,8 @@
+.app {
+  @apply p-[12px] flex justify-between items-center sticky top-0 z-[100] bg-[#fff];
+  :global {
+    .app-title {
+      @apply hover:bg-[#f9f9f9] rounded-[10px] p-[10px] cursor-pointer;
+    }
+  }
+}

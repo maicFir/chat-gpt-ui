@@ -1,0 +1,3 @@
+.app {
+  @apply pc:min-w-[768px] m-auto flex flex-col h-full phone:max-w-[640px];
+}

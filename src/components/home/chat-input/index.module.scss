@@ -1,0 +1,14 @@
+.app {
+  @apply w-full pc:max-w-[768px] m-auto;
+  :global {
+    .chat-input-wrap {
+      @apply bg-[#f4f4f4] rounded-[20px] pt-[15px] pb-[4px] px-[15px] phone:mx-[10px];
+      textarea {
+        @apply w-full bg-transparent outline-none text-[#0d0d0d];
+        :placeholder {
+          @apply text-[14px] text-[#5d5d5d];
+        }
+      }
+    }
+  }
+}

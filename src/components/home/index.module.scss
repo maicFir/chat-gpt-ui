@@ -1,0 +1,8 @@
+.app {
+    @apply px-[29px] ;
+    height: calc(100vh - 68px);
+}
+.app-no-data {
+    @apply flex flex-col items-center justify-center;
+    height: calc(100vh - 68px);
+}

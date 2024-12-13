@@ -1,0 +1,19 @@
+.app {
+    @apply min-h-[100px];
+    :global {
+        .item {
+            @apply px-[8px] py-[6px] hover:bg-[#ececec] cursor-pointer rounded-[5px];
+            &:hover {
+              .options {
+                @apply opacity-[1] transition-all duration-200;
+              }
+            }
+            .options {
+              @apply opacity-0;
+            }
+            span {
+              @apply pl-[5px];
+            }
+          }
+    }
+  }

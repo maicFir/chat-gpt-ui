@@ -19,8 +19,10 @@ export const getOpenRouterApi = async (
               headers,
               body: JSON.stringify(params),
             }
-          );
-
+          )
+          if (!response.ok) {
+            return Promise.reject(response)
+        }
         if (!response.body) {
             throw new Error("No response body");
         }
@@ -58,8 +60,9 @@ export const getOpenRouterApi = async (
           }
         }
       
-    }   catch (error) {
-        
+    } catch (error) {
+     
+        return Promise.reject(error);
     }
 };
 

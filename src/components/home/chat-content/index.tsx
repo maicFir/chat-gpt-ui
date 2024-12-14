@@ -44,31 +44,43 @@ const Index: React.FC<Props> = (props) => {
     // console.log(chatId, "=chatId");
     const lastIndex = chatIdObj[current_routerId]?.length - 1;
     const currentItem = chatIdObj[current_routerId][lastIndex];
+    if (!currentItem) {
+      return;
+    }
 
     const payload = {
       model: "mistralai/mistral-7b-instruct-v0.1",
-      messages: [{ role: "user", content: currentItem.ask }],
+      messages: [{ role: "user", content: currentItem?.ask }],
       stream: true,
     };
-    const new_chat_obj = JSON.parse(JSON.stringify(chatIdObj));
-    await getOpenRouterApi(
-      payload,
-      {
-        Authorization: `Bearer ${api_screct}`,
-        "HTTP-Referer": "https://gptui.iruns.xyz/", // Optional, for including your app on openrouter.ai rankings.
-         "X-Title": `chat-gpt-ui`, // Optional. Shows in rankings on openrouter.ai.
-        "Content-Type": "application/json",
-      },
-      (content: string) => {
-        Object.keys(new_chat_obj).forEach((routerId) => {
-          if (routerId === params?.id) {
-            new_chat_obj[routerId][lastIndex].answer = content;
-          }
-        });
-        storeChatObj(new_chat_obj);
-      }
-    );
     // 简单深拷贝一份
+    const new_chat_obj = JSON.parse(JSON.stringify(chatIdObj));
+    try {
+      await getOpenRouterApi(
+        payload,
+        {
+          Authorization: `Bearer ${api_screct}`,
+          //"HTTP-Referer": "https://gptui.iruns.xyz/", // Optional, for including your app on openrouter.ai rankings.
+          // "X-Title": `chat-gpt-ui`, // Optional. Shows in rankings on openrouter.ai.
+          "Content-Type": "application/json",
+        },
+        (content: string) => {
+          Object.keys(new_chat_obj).forEach((routerId) => {
+            if (routerId === params?.id) {
+              new_chat_obj[routerId][lastIndex].answer = content;
+            }
+          });
+          storeChatObj(new_chat_obj);
+        }
+      );
+    } catch (error) {
+      message.alert({
+        type: "error",
+        msg: "Invalid credentials",
+      });
+      // 清空所有消息
+      storeChatObj({});
+    }
   };
 
   useEffect(() => {
@@ -123,9 +135,13 @@ const Index: React.FC<Props> = (props) => {
               </Typography>
             </Typography>
             <Typography component={"div"}>
-              <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
-                {v.answer}
-              </ReactMarkdown>
+              {!v.answer ? (
+                "loading..."
+              ) : (
+                <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
+                  {v.answer}
+                </ReactMarkdown>
+              )}
             </Typography>
           </Typography>
         </Typography>

@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+### 关于项目
+主要仿造ChatGPT，使用免费的model Mistral 7B Instruct实现简易的对话功能。
 
-## Getting Started
-
-First, run the development server:
+## 如何启动本地开发环境
 
 ```bash
+# 1 使用 npm or pnpm 安装项目依赖
+npm install or pnpm i
+# 2 使用 npm or yarn or pnpm 运行本地开发环境
 npm run dev
 # or
 yarn dev
 # or
-pnpm dev
-# or
-bun dev
+pnpm run dev
 ```
-
+### 本地预览
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 在线预览地址
 
-<!-- https://img.picui.cn/free/2024/12/13/675bffd8b9195.png
-https://img.picui.cn/free/2024/12/13/675bffd8de90f.png
-https://img.picui.cn/free/2024/12/13/675bffd8e4c7d.png -->
-### 预览
-<img src="https://img.picui.cn/free/2024/12/13/675bffd8b9195.png" width="200"/>
-
-<img src="https://img.picui.cn/free/2024/12/13/675bffd8de90f.png" width="200"/>
-
-<img src="https://img.picui.cn/free/2024/12/13/675bffd8e4c7d.png" width="200"/>
+[https://gptui.iruns.xyz](https://gptui.iruns.xyz/)
 
 
-![]("./public/2.png")
+### 项目截图
 
-![]("./public/3.png")
+![image](https://img.picui.cn/free/2024/12/13/675bffd8b9195.png)
+![image](https://img.picui.cn/free/2024/12/13/675bffd8de90f.png)
+![image](https://img.picui.cn/free/2024/12/13/675bffd8e4c7d.png)

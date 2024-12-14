@@ -15,8 +15,8 @@ const Index: React.FC<Props> = (props) => {
   return (
     <Box className={style["app"]}>
       <ChatContent />
-          <ChatInput />
-          <Typography textAlign={"center"} sx={{padding: "10px 0"}}>ChatGPT 也可能会犯错。请核查重要信息。</Typography>
+      <ChatInput />
+      <Typography textAlign={"center"} padding={"10px 0"}>ChatGPT 也可能会犯错。请核查重要信息。</Typography>
     </Box>
   );
 };

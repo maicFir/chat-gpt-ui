@@ -20,6 +20,7 @@ import {
 import { guid, storageUtils } from "@/utils";
 import { PagePathName } from "@src/constants";
 import { useGlobalStore } from "@src/store";
+import { message } from "@comp/global";
 
 import style from "./index.module.scss";
 interface Props {}
@@ -41,6 +42,14 @@ const Index: React.FC<Props> = (props) => {
   const isLock = useRef(false);
   const [searchValue, setSearchValue] = useState("");
   const handleSubmit = async () => {
+    if (!api_screct) {
+      message.alert({
+        type: "error",
+        msg: "please config api key",
+      });
+      push(PagePathName.API_KEY);
+      return;
+    }
     if (isLock.current) {
       return;
     }
@@ -94,6 +103,12 @@ const Index: React.FC<Props> = (props) => {
       [params?.id as any]: [],
     });
   };
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter") {
+      event.preventDefault(); // 防止默认行为（例如提交表单）
+      handleSubmit(); // 执行提交操作
+    }
+  };
   return (
     <Box className={style["app"]}>
       {isHome ? (
@@ -112,6 +127,7 @@ const Index: React.FC<Props> = (props) => {
           minRows={3}
           placeholder="给GPT发送消息"
           onChange={(e) => handleChangeValue(e)}
+          onKeyDown={(e) => handleKeyDown(e)}
         />
         <Typography
           component={"div"}

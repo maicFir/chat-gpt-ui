@@ -4,7 +4,16 @@
  */
 "use client";
 import React, { memo, useCallback, useEffect, useState } from "react";
-import { Typography, Box, Popper, Fade, Paper, Switch, Drawer } from "@mui/material";
+import {
+  Typography,
+  Box,
+  Popper,
+  Fade,
+  Paper,
+  Switch,
+  Drawer,
+  useMediaQuery,
+} from "@mui/material";
 import {
   ArrowForwardIos as ArrowForwardIosIcon,
   TaskAlt as TaskAltIcon,
@@ -29,6 +38,7 @@ const Index: React.FC<Props> = (props) => {
   const { push } = useRouter();
   const { modelKey, userName } = useGlobalStore();
   const { isPc } = useIsPc();
+  const isSmallScreenPc = useMediaQuery("(min-width:1025px)");
   const [visibleOpen, setVisibleOpen] = useState(false);
   const [defaultKey, setDefaultKey] = useState("gpt-4o");
   const [modelList, setModelList] = useState([
@@ -80,12 +90,16 @@ const Index: React.FC<Props> = (props) => {
     push(PagePathName.API_KEY);
   };
   const handleOpenMenu = (bool: boolean) => {
-    setVisibleOpen(bool)
+    setVisibleOpen(bool);
   };
   return (
     <Box className={appClass} display={"flex"} justifyContent={"space-between"}>
       <Typography component={"div"} display={"flex"} alignItems={"center"}>
-        {isPc ? <></> : <MenuIcon onClick={() => handleOpenMenu(true)} />}
+        {isPc && isSmallScreenPc ? (
+          <></>
+        ) : (
+          <MenuIcon onClick={() => handleOpenMenu(true)} />
+        )}
         <Typography
           className="app-title"
           display={"flex"}
@@ -194,7 +208,7 @@ const Index: React.FC<Props> = (props) => {
         </Typography>
       </Typography>
       <Drawer open={visibleOpen} onClose={() => handleOpenMenu(false)}>
-          <SlideBar />
+        <SlideBar />
       </Drawer>
     </Box>
   );

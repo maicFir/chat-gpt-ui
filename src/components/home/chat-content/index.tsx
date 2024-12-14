@@ -48,24 +48,27 @@ const Index: React.FC<Props> = (props) => {
     const payload = {
       model: "mistralai/mistral-7b-instruct-v0.1",
       messages: [{ role: "user", content: currentItem.ask }],
+      stream: true,
     };
-    const res = await getOpenRouterApi(payload, {
-      Authorization: `Bearer ${api_screct}`,
-      // "HTTP-Referer": "https://openrouter.ai", // Optional, for including your app on openrouter.ai rankings.
-      // "X-Title": `chat-gpt-ui`, // Optional. Shows in rankings on openrouter.ai.
-      "Content-Type": "application/json",
-    });
-    // 简单深拷贝一份
     const new_chat_obj = JSON.parse(JSON.stringify(chatIdObj));
-
-    Object.keys(new_chat_obj).forEach((routerId) => {
-      if (routerId === params?.id) {
-        new_chat_obj[routerId][lastIndex].answer =
-          res.choices[0].message.content;
+    await getOpenRouterApi(
+      payload,
+      {
+        Authorization: `Bearer ${api_screct}`,
+        "HTTP-Referer": "https://gptui.iruns.xyz/", // Optional, for including your app on openrouter.ai rankings.
+         "X-Title": `chat-gpt-ui`, // Optional. Shows in rankings on openrouter.ai.
+        "Content-Type": "application/json",
+      },
+      (content: string) => {
+        Object.keys(new_chat_obj).forEach((routerId) => {
+          if (routerId === params?.id) {
+            new_chat_obj[routerId][lastIndex].answer = content;
+          }
+        });
+        storeChatObj(new_chat_obj);
       }
-    });
-    console.log(res.choices[0].message.content);
-    storeChatObj(new_chat_obj);
+    );
+    // 简单深拷贝一份
   };
 
   useEffect(() => {

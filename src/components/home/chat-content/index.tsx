@@ -21,7 +21,7 @@ const Index: React.FC<Props> = (props) => {
   const {} = props;
 
   const params = useParams();
-  const { chatIdObj, routerId, api_screct, chatId, storeChatObj } =
+  const { chatIdObj, routerId, api_screct, chatId, storeChatObj, model } =
     useGlobalStore();
 
   const chartData = useMemo(() => {
@@ -49,7 +49,7 @@ const Index: React.FC<Props> = (props) => {
     }
 
     const payload = {
-      model: "mistralai/mistral-7b-instruct-v0.1",
+      model: model,
       messages: [{ role: "user", content: currentItem?.ask }],
       stream: true,
     };
@@ -65,6 +65,7 @@ const Index: React.FC<Props> = (props) => {
           "Content-Type": "application/json",
         },
         (content: string) => {
+          console.log();
           Object.keys(new_chat_obj).forEach((routerId) => {
             if (routerId === params?.id) {
               new_chat_obj[routerId][lastIndex].answer = content;

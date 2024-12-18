@@ -4,6 +4,7 @@ import { PagePathKey} from "@src/constants";
 const initState = {
     modelKey: "",
     userName: "",
+    model: "",
     api_screct: "",
     chatIdObj: {} as any,
     chatId: "",
@@ -14,6 +15,7 @@ const initState = {
     storeChatObj: (val: any) => { },
     storeChatId: (val: any) => { },
     storeRouterId: (val: any) => { },
+    storeModel: (val: any) => { },
 };
 
 export const useGlobalStore = create(
@@ -21,7 +23,8 @@ export const useGlobalStore = create(
       (set) => ({
         modelKey: PagePathKey.ChatGpt,
         userName: "",
-        api_screct: process.env.NEXT_PUBLIC__CHAT_GPT_KEY ?? "",
+        model: "openai/gpt-3.5-turbo-instruct",
+        api_screct: process.env.NEXT_PUBLIC__CHAT_GPT_KEY ?? "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",
         chatIdObj: {} as any,
         chatId: "",
         routerId: "",
@@ -31,6 +34,7 @@ export const useGlobalStore = create(
         storeChatObj: (chatIdObj: any) => set({ chatIdObj }),
         storeChatId: (chatId: any) => set({ chatId }),
         storeRouterId: (routerId: any) => set({ routerId }),
+        storeModel: (model: any) => set({ model }),
       }),
       {
         name: "chat-gpt-ui",

@@ -3,8 +3,16 @@
  * @description 请添加组件描述
  * @author maicFir
  */
-import React, { memo, useState } from "react";
-import { Box, Typography, Button, Input } from "@mui/material";
+import React, { memo, useState, useEffect } from "react";
+import {
+  Box,
+  Typography,
+  Button,
+  Input,
+  Select,
+  MenuItem,
+  InputLabel,
+} from "@mui/material";
 import { Formik } from "formik";
 import { useRouter } from "next/navigation";
 import { useGlobalStore } from "@store/index";
@@ -14,15 +22,27 @@ interface Props {}
 type userItemType = {
   API_KEY: string;
   USER_NAME: string;
+  Model: string;
 };
+const MODE_LIST = [
+  {
+    value: "openai/gpt-3.5-turbo-instruct",
+    label: "gpt-3.5-turbo",
+  },
+  {
+    value: "mistralai/ministral-8b",
+    label: "Mistral 7B Instruct",
+  },
+];
 const Index: React.FC<Props> = (props) => {
   const {} = props;
   const { push } = useRouter();
-  const { storeApiScrect, storeUserName, api_screct } = useGlobalStore();
-
+  const { storeApiScrect, storeUserName, api_screct, storeModel } = useGlobalStore();
+  const [modelList, setModelList] = useState(MODE_LIST);
   const [userFormData, setUserFormData] = useState<userItemType>({
     API_KEY: api_screct,
     USER_NAME: "Elen",
+    Model: "openai/gpt-3.5-turbo-instruct",
   });
 
   const onValidate = (values: userItemType) => {
@@ -35,6 +55,9 @@ const Index: React.FC<Props> = (props) => {
     }
     return errors;
   };
+  useEffect(() => {
+    storeModel(userFormData?.Model)
+  }, [userFormData?.Model])
 
   return (
     <Box className={style["app"]}>
@@ -43,7 +66,10 @@ const Index: React.FC<Props> = (props) => {
           ...userFormData,
         }}
         validate={onValidate}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(
+          values: { API_KEY: any; USER_NAME: any },
+          { setSubmitting }: any
+        ) => {
           console.log(values);
           const { API_KEY, USER_NAME } = values;
           setSubmitting(false);
@@ -72,8 +98,41 @@ const Index: React.FC<Props> = (props) => {
                   display={"flex"}
                   alignItems={"center"}
                 >
+                  Model:
+                </Typography>
+
+                <Select
+                  fullWidth
+                  name="Model"
+                  value={values.Model}
+                  onChange={handleChange}
+                >
+                  {modelList.map((item, index) => {
+                    return (
+                      <MenuItem key={index} value={item.value}>
+                        {item.label}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </Typography>
+              <p className="error">
+                {errors.API_KEY && touched.API_KEY && errors.API_KEY}
+              </p>
+            </Typography>
+            <Typography
+              component="div"
+              sx={{ borderBottom: "1px solid #ccc", margin: "10px 0" }}
+            >
+              <Typography component="div" display="flex">
+                <Typography
+                  className="required"
+                  display={"flex"}
+                  alignItems={"center"}
+                >
                   API_KEY:
                 </Typography>
+
                 <Input
                   type="text"
                   name="API_KEY"

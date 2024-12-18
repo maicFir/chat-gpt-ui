@@ -25,6 +25,7 @@ import { message } from "@comp/global";
 import style from "./index.module.scss";
 interface Props {}
 
+let objTarget: any = {};
 const Index: React.FC<Props> = (props) => {
   const {} = props;
   const {
@@ -59,14 +60,16 @@ const Index: React.FC<Props> = (props) => {
       const chatId = guid();
       storeChatId(chatId);
       storeRouterId(router_gid);
-      const objTarget = {
-        [router_gid]: [{ ask: searchValue, answer: "", chatId }],
-      };
+        objTarget[`${router_gid}`] = [
+            {
+                ask: searchValue, answer: "", chatId, 
+                date: new Date().getTime()
+            }
+      ];
       storeChatObj(objTarget);
       push(`/chat/${router_gid}`);
       isLock.current = false;
     } else {
-      console.log(params);
       const newObj: any = {
         ...chatIdObj,
       };
@@ -78,6 +81,7 @@ const Index: React.FC<Props> = (props) => {
             ask: searchValue,
             answer: "",
             chatId,
+            date: new Date().getTime(),
           });
         }
       });

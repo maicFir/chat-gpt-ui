@@ -42,7 +42,10 @@ const Index: React.FC<Props> = (props) => {
     }
     // console.log(chatIdObj);
     // console.log(chatId, "=chatId");
-    const lastIndex = chatIdObj[current_routerId]?.length - 1;
+      const lastIndex = chatIdObj[current_routerId]?.length - 1;
+    if (lastIndex === -1 || Number.isNaN(lastIndex)) {
+        return;
+    }
     const currentItem = chatIdObj[current_routerId][lastIndex];
     if (!currentItem) {
       return;
@@ -65,7 +68,7 @@ const Index: React.FC<Props> = (props) => {
           "Content-Type": "application/json",
         },
         (content: string) => {
-          console.log();
+          console.log(content);
           Object.keys(new_chat_obj).forEach((routerId) => {
             if (routerId === params?.id) {
               new_chat_obj[routerId][lastIndex].answer = content;

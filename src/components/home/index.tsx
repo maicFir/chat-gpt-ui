@@ -3,6 +3,7 @@
  * @author maicFir
  */
 import React, { memo } from "react";
+import Link from "next/link"
 import { Box, Typography } from "@mui/material";
 import clsx from "clsx";
 import ChatInput from "./chat-input";
@@ -17,6 +18,17 @@ const Index: React.FC<Props> = (props) => {
   });
   return (
     <Box className={appClass}>
+      
+       <Link href="twitter://user?screen_name=JupiterExchange" target="_blank">twitter://user?screen_name=JupiterExchange</Link>
+      
+      <Link href="https://x.com/JupiterExchange" target="_blank">https://x.com/JupiterExchange</Link>
+        <Link href="https://x.com/@JupiterExchange" target="_blank">https://x.com/@JupiterExchange</Link>
+        <Link href="twitter://JupiterExchange" target="_blank">twitter://JupiterExchange</Link>
+       <Link href="x://JupiterExchange" target="_blank">x://JupiterExchange</Link>
+      <Link href="x://@JupiterExchange" target="_blank">x://JupiterExchange</Link>
+       <Link href="x://user?screen_name=JupiterExchange" target="_blank">twitter://user?screen_name=JupiterExchange</Link>
+       <Link href="twitter://profile?screen_name=JupiterExchange" target="_blank">twitter://profile?screen_name=JupiterExchange</Link>
+       <Link href="x://profile?screen_name=JupiterExchange" target="_blank">x://profile?screen_name=JupiterExchange</Link>
       <ChatInput />
       <Typography
         textAlign={"center"}
